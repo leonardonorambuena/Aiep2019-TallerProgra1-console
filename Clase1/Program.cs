@@ -10,7 +10,37 @@ namespace Area
         {
             //FirstExample();
             //SecondExample();
+            var califications = new List<int>();
 
+            Console.WriteLine("Cuantas notas va a ingresar:");
+
+            var cant = Convert.ToInt32(Console.ReadLine());
+
+            var acumulador = 0;
+
+            for(var i = 0; i < cant; i++)
+            {
+                Console.WriteLine("Ingrese nota "+ (i + 1));
+                var nota = Convert.ToInt32(Console.ReadLine());
+                acumulador = acumulador + nota; 
+            }
+
+            var promedio = acumulador / cant;
+
+            if (promedio >= 40)
+            {
+                Console.WriteLine("Aprobado con promedio "+promedio);
+            }
+            else
+            {
+                Console.WriteLine("Reprobado con promedio "+promedio);
+            }
+            
+
+        }
+
+        public static void AverageWithList()
+        {
             var califications = new List<int>();
 
             Console.WriteLine("Cuantas notas va a ingresar:");
@@ -33,9 +63,7 @@ namespace Area
             {
                 Console.WriteLine("Reprobado con promedio "+promedio);
             }
-
         }
-
         public static void SecondExample()
         {
             int age = 0;

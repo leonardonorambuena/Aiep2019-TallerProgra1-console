@@ -1,0 +1,11 @@
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/bin/Debug/netcoreapp2.2/Dfd.deps.json
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/bin/Debug/netcoreapp2.2/Dfd.runtimeconfig.json
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/bin/Debug/netcoreapp2.2/Dfd.runtimeconfig.dev.json
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/bin/Debug/netcoreapp2.2/Dfd.dll
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/bin/Debug/netcoreapp2.2/Dfd.pdb
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/obj/Debug/netcoreapp2.2/Dfd.csprojAssemblyReference.cache
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/obj/Debug/netcoreapp2.2/Dfd.csproj.CoreCompileInputs.cache
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/obj/Debug/netcoreapp2.2/Dfd.AssemblyInfoInputs.cache
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/obj/Debug/netcoreapp2.2/Dfd.AssemblyInfo.cs
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/obj/Debug/netcoreapp2.2/Dfd.dll
+/Users/leonardonorambuena/Sites/netcore/Aiep/console/Clase2/obj/Debug/netcoreapp2.2/Dfd.pdb
