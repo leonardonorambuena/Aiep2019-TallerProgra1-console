@@ -23,6 +23,34 @@ namespace Dfd
                 opcion = Console.ReadLine().ToUpper();
             }while(opcion != "N");*/
 
+            Console.WriteLine("Ingrese un numero");
+
+            var number = Convert.ToInt32(Console.ReadLine());
+
+            if (IsPrime(number))
+                Console.WriteLine("El numero es primo");
+            else 
+                Console.WriteLine("El numero no es primo");
+            
+            
+
+        }
+
+        static bool IsPrime(int number)
+        {
+            if (number < 2)
+                return false;
+
+            for(var i = 2; i < number; i++)
+            {
+                if (number % i == 0)
+                    return false;
+            }
+
+            return true;
+        }
+        static void DoWhileExample()
+        {
             int number = 0;
             do 
             {
@@ -30,7 +58,6 @@ namespace Dfd
                 number = Convert.ToInt32(Console.ReadLine());
             }
             while(number <= 100);
-
         }
 
         static void ForExample()
