@@ -12,17 +12,20 @@ function renderizarNotas() {
 
   let ExigenciaPorcentaje = Exigencia / 100
 
+  let PuntajeObtenido = document.getElementById('PuntajeObtenido').value
+
 
   if(NotaAprobacion && Exigencia && PuntajeMaximo) {
+
+    if (PuntajeObtenido) {
+      nota = obtenerNota(NotaMinima, NotaMaxima, NotaAprobacion, ExigenciaPorcentaje, PuntajeMaximo,PuntajeObtenido) 
+      document.getElementById('ResultadoPuntaje').innerText = `Su nota fue ${nota}`
+      return
+    }
+
     let result = []
     for(let i = 0; i <= PuntajeMaximo; i++) {
-      let nota = 0
-      if (i < (ExigenciaPorcentaje * PuntajeMaximo)) {
-        nota = parseFloat((NotaAprobacion - NotaMinima) * (i / (ExigenciaPorcentaje * PuntajeMaximo)) + parseInt(NotaMinima)).toFixed(1)
-      } else {
-        nota = (NotaMaxima - NotaAprobacion) * (i - (ExigenciaPorcentaje * PuntajeMaximo))/ (PuntajeMaximo * (1 - ExigenciaPorcentaje))
-        nota = parseFloat(nota + parseInt(NotaAprobacion)).toFixed(1)
-      }
+      let nota = obtenerNota(NotaMinima, NotaMaxima, NotaAprobacion, ExigenciaPorcentaje, PuntajeMaximo,i)      
       result.push({
         puntaje:  i,
         nota: nota,
@@ -31,6 +34,18 @@ function renderizarNotas() {
     }
     renderTable(result)
   }
+}
+
+function obtenerNota(NotaMinima, NotaMaxima, NotaAprobacion,ExigenciaPorcentaje,PuntajeMaximo, PuntoObtenido) {
+  let nota = 0
+  if (PuntoObtenido < (ExigenciaPorcentaje * PuntajeMaximo)) {
+    nota = parseFloat((NotaAprobacion - NotaMinima) * (PuntoObtenido / (ExigenciaPorcentaje * PuntajeMaximo)) + parseInt(NotaMinima)).toFixed(1)
+  } else {
+    nota = (NotaMaxima - NotaAprobacion) * (PuntoObtenido - (ExigenciaPorcentaje * PuntajeMaximo))/ (PuntajeMaximo * (1 - ExigenciaPorcentaje))
+    nota = parseFloat(nota + parseInt(NotaAprobacion)).toFixed(1)
+  }
+
+  return nota
 }
 
 function renderTable(result) {
