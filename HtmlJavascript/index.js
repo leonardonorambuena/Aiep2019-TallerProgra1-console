@@ -14,6 +14,11 @@ function renderizarNotas() {
 
   let PuntajeObtenido = document.getElementById('PuntajeObtenido').value
 
+  if (PuntajeObtenido > PuntajeMaximo) {
+    alert('El puntaje obtenido no puede exceder al puntaje máximo')
+    return
+  }
+
 
   if(NotaAprobacion && Exigencia && PuntajeMaximo) {
 
