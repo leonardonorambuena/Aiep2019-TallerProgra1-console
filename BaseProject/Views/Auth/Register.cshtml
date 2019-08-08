@@ -7,6 +7,8 @@
   <div class="card-header">@ViewData["Title"]</div>
   <div class="card-body">
     <form action="/Auth/Register" method="POST">
+    @Html.ValidationSummary()
+    @Html.AntiForgeryToken()
       <div class="form-group">
         <label>Email</label>
         <input type="email"  class="form-control" asp-for="Email" />

@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using BaseProject.Models;
 using BaseProject.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,48 @@ namespace BaseProject.Controllers
             _signInManager = signInManager;
             _db = db;
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _db.Users.FirstOrDefaultAsync(x => x.UserName == model.UserName && x.DeletedAt == null);
+                if (user == null)
+                {
+                    ModelState.AddModelError("","Intento de inicio fallido");
+                }
+
+                var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false);
+
+                if (result.Succeeded) 
+                {
+                    await _signInManager.SignInAsync(user,false);
+                    return RedirectToAction("Index", "Home");
+                }
+
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
         public IActionResult Register()
         {
             return View();

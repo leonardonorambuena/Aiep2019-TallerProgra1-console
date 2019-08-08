@@ -37,7 +37,12 @@ namespace BaseProject
                 x.UseMySql("server=localhost;database=base-project;user=root;password=");
             });
 
-            services.AddIdentity<User, Role>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<User, Role>(x => {
+                x.Password.RequireDigit = false;
+                x.Password.RequireLowercase = false;
+                x.Password.RequireNonAlphanumeric = false;
+                x.Password.RequireUppercase = false;
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -60,6 +65,7 @@ namespace BaseProject
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
