@@ -3,14 +3,16 @@ using System;
 using BaseProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaseProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190808234902_DatesToModel")]
+    partial class DatesToModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,13 +31,9 @@ namespace BaseProject.Migrations
                     b.Property<string>("Path")
                         .IsRequired();
 
-                    b.Property<int>("ProductId");
-
                     b.Property<DateTime?>("UpdatedAt");
 
                     b.HasKey("ImageId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Images");
                 });
@@ -232,14 +230,6 @@ namespace BaseProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("BaseProject.Models.Image", b =>
-                {
-                    b.HasOne("BaseProject.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

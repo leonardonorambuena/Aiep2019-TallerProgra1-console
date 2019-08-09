@@ -3,14 +3,16 @@ using System;
 using BaseProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaseProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190808232952_ProductModel")]
+    partial class ProductModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,20 +24,10 @@ namespace BaseProject.Migrations
                     b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("CreatedAt");
-
-                    b.Property<DateTime?>("DeletedAt");
-
                     b.Property<string>("Path")
                         .IsRequired();
 
-                    b.Property<int>("ProductId");
-
-                    b.Property<DateTime?>("UpdatedAt");
-
                     b.HasKey("ImageId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("Images");
                 });
@@ -45,18 +37,12 @@ namespace BaseProject.Migrations
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("CreatedAt");
-
-                    b.Property<DateTime?>("DeletedAt");
-
                     b.Property<string>("Description");
 
                     b.Property<int>("ProductPrice");
 
                     b.Property<string>("ProductTitle")
                         .IsRequired();
-
-                    b.Property<DateTime?>("UpdatedAt");
 
                     b.HasKey("ProductId");
 
@@ -232,14 +218,6 @@ namespace BaseProject.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("BaseProject.Models.Image", b =>
-                {
-                    b.HasOne("BaseProject.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

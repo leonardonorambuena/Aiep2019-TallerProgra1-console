@@ -1,0 +1,21 @@
+@model List<BaseProject.Models.Product>
+
+@{
+  ViewData["Title"] = "Gestionar productos";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if(Model != null && Model.Count > 0)
+{
+
+}
+else
+{
+  <div class="alert alert-warning">
+    No se encontraron Productos 
+    <a href="/Products/Create" class="btn btn-info">
+    Cree un producto
+    </a>
+  </div>
+}

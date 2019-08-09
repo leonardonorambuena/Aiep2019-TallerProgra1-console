@@ -11,5 +11,9 @@ namespace BaseProject.Models
         
     }
 
+    public DbSet<Product> Products { get; set; }
+
+    public DbSet<Image> Images { get; set; }
+
   }
 }
