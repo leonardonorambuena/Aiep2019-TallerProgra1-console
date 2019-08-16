@@ -6,12 +6,9 @@ namespace ProductConsole
     {
         static void Main(string[] args)
         {
-            MenuRender.RenderMenu();
-            
+            var menu = new MenuRender();
+            menu.RenderMenu();      
 
-            
-
-            
         }
     }
 }

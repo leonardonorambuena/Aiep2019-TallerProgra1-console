@@ -1,7 +1,11 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace ProductConsole.Models
 {
     public class Product
     {
+        [Key]
+        public int PorductId { get; set; }
         public string Title { get; set; }
 
         public string Description { get; set; }

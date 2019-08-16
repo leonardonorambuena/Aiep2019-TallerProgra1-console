@@ -1,26 +1,84 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using ProductConsole.Models;
 
 namespace ProductConsole
 {
     public class MenuRender
     {
-        public static void RenderMenu()
+        public List<Product> Products { get; set; }
+
+        public MenuRender()
         {
-            int Option = 0;
-            Console.WriteLine("1 - Ingrese un Producto");
-            Console.WriteLine("2 - Listar Productos");
-            
-            if(int.TryParse(Console.ReadLine(), out Option))
+            if (Products == null)
+               Products = GetProducts(); 
+                
+        }
+
+        public List<Product> GetProducts()
+        {
+            using(var db = new ApplicationDbContext())
             {
-                if (Option == 1)
-                    RenderCreateProduct();
+                return db.Products.ToList();
             }
+        }
+
+        public void RenderHeader(string title)
+        {
+            Console.Clear();
+            Console.WriteLine("------------------------------------------------");
+            Console.WriteLine(title);
+            Console.WriteLine("------------------------------------------------");
+        }
+        public  void RenderMenu()
+        {
+
+            int Option = 0;
+            while(Option != 9)
+            {
+                RenderHeader("Menú Principal");                
+                Console.WriteLine("1 - Ingrese un Producto");
+                Console.WriteLine("2 - Listar Productos");
+                Console.WriteLine("3 - Resumen");
+                Console.WriteLine("9 - Salir");
+                if(int.TryParse(Console.ReadLine(), out Option))
+                {
+                    if (Option == 1)
+                        RenderCreateProduct();
+                    if (Option == 2)
+                        RenderListProduct();
+                    if (Option == 3)
+                        RenderResumeProduct();
+                }
+            } 
+            
 
         }
 
-        public static void RenderCreateProduct()
+        private void RenderResumeProduct()
         {
+            RenderHeader("Consolidado");
+            Console.WriteLine($"Cantidad de productos registrados : {Products.Count}");
+            Console.WriteLine($"Cantidad total de productos: {Products.Sum(x => x.Stock)} ");
+            Console.WriteLine($"Valor total en productos: {Products.Sum(x => x.Price)}");
+            Console.ReadKey();
+        }
+
+        public  void RenderListProduct()
+        {
+            RenderHeader("Listado de productos");
+            foreach(var product in Products)
+            {
+                Console.WriteLine($"Nombre: {product.Title} | Desscripción: {product.Description} | Precio: {product.Price} | stock: {product.Stock} | total: {product.Total}");
+            }
+
+            Console.ReadKey();
+        }
+
+        public  void RenderCreateProduct()
+        {
+            RenderHeader("Ingreso de producto");
             var product = new Product();
             Console.WriteLine("Ingrese Nombre del Productos");
             product.Title = Console.ReadLine();
@@ -47,7 +105,20 @@ namespace ProductConsole
             product.Price = Price;
             product.Stock = Stock;
 
+            // REGISTRO DE PRODUCTO EN MEMORIA
+            //Products.Add(product);
+
+            using(var db = new ApplicationDbContext())
+            {
+                // Registro de base de datos, persistencia de datos
+                db.Products.Add(product);
+                // se guardan los datos en la base de datos
+                db.SaveChanges();
+            }
+
             Console.WriteLine($"El valor total es: {product.Total}");
+            Products = GetProducts();
+            Console.ReadKey();
         }
         
 
